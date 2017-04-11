@@ -1,0 +1,37 @@
+<h1>Lake Times</h1>
+
+<div class="addNewTime">
+  <h3>Add new time</h3>
+
+<div class="messages">
+  {{#each messages.error}}
+    <p class="error_msg">{{this}}</p>
+  {{/each}}
+</div>
+
+<form action="/" method="POST">
+  Date: <input name="date" type="date">
+  <br>
+  Lake Name: <input name="lakename" type="text">
+  <br>
+  Time: <input name="laketimeminutes" type="number">Minutes</input>
+  <br>
+  <input name="laketimeseconds" type="number">Seconds</input>
+  <br>
+  <input name="addTime" type="submit" value="Add New Time">
+  <br>
+  <hr>
+</form>
+</div>
+
+<div class="lakeTimes">
+  <h3>Lake Times</h3>
+
+{{# each lakes}}
+  <p>Date: {{this.date}}</p>
+  <p>Lake Name: {{this.lakename}}</p>
+  <p>Time: {{this.laketimeminutes}} Minutes
+           {{this.laketimeseconds}} Seconds</p>
+  <hr>
+  {{/each}}
+</div>
