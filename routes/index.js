@@ -12,6 +12,24 @@ router.get('/', function(req, res, next) {
 })
 });
 
+router.post('/delete', function(req,res,next){
+
+  var id = req.body._id;
+  Lake.findByIdAndRemove(id, function(err, lake){
+
+  if(err){
+    return next(err);
+  }
+  if(!lake){
+    var req_err = new Error('Task not found');
+    req_err.status = 404;
+    return next(req_err);
+  }
+  req.flash('info','Deleted');
+  return res.redirect('/')
+  })
+});
+
 // POST to home page - handle form submit
 router.post('/', function(req, res, next){
   console.log(req.body);
@@ -33,10 +51,6 @@ var lake = Lake(lakeData);
           messages.push(err.errors[err_name].message);
         }
     req.flash('error', messages);
-    return res.redirect('/')
-  }
-  if(err.code==11000){
-    req.flash('error', 'A lake with that name already exists');
     return res.redirect('/')
   }
     return next(err);

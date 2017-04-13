@@ -1,5 +1,5 @@
-<h1>Lake Times</h1>
-
+<h1>Lake Runner</h1>
+<hr>
 <div class="addNewTime">
   <h3>Add new time</h3>
 
@@ -10,14 +10,14 @@
 </div>
 
 <form action="/" method="POST">
-  Date: <input name="date" type="date">
-  <br>
-  Lake Name: <input name="lakename" type="text">
-  <br>
-  Time: <input name="laketimeminutes" type="number">Minutes</input>
-  <br>
-  <input name="laketimeseconds" type="number">Seconds</input>
-  <br>
+  Date: <input name="date" type="date" required>
+  <br><br>
+  Lake Name: <input name="lakename" type="text" required>
+  <br><br>
+  Time: <input name="laketimeminutes" type="number" min="0" max="59" required>Minutes</input>
+  <br><br>
+  <input name="laketimeseconds" type="number" min="1" max="59">Seconds</input>
+  <br><br>
   <input name="addTime" type="submit" value="Add New Time">
   <br>
   <hr>
@@ -32,6 +32,10 @@
   <p>Lake Name: {{this.lakename}}</p>
   <p>Time: {{this.laketimeminutes}} Minutes
            {{this.laketimeseconds}} Seconds</p>
+  <form action="delete" method="POST">
+  <input type="hidden" name="_id" value="{{this._id}}">
+  <input class="delete_button" type="submit" name="delete" value="Delete">
+</form>
   <hr>
   {{/each}}
 </div>
